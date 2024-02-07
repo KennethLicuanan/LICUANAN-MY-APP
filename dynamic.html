@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Search</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #search-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+        }
+
+        #search-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        #result-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .result-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #back-button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            outline: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="search-container">
+        <div id="search-header">
+            <h2>Dynamic Search</h2>
+        </div>
+        <input type="text" id="search-input" placeholder="Search...">
+        <ul id="result-list"></ul>
+        <button id="back-button" onclick="goToMainPage()">Go Back</button>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const resultList = document.getElementById('result-list');
+
+        // Sample data
+        const data = [
+            'Apple',
+            'Banana',
+            'Orange',
+            'Grapes',
+            'Mango',
+            'Strawberry',
+            'Watermelon',
+            'Pineapple'
+        ];
+
+        function filterResults() {
+            const searchTerm = searchInput.value.toLowerCase();
+            resultList.innerHTML = '';
+
+            const filteredData = data.filter(item => item.toLowerCase().includes(searchTerm));
+
+            filteredData.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.className = 'result-item';
+                listItem.textContent = item;
+                resultList.appendChild(listItem);
+            });
+        }
+
+        function goToMainPage() {
+            // Replace this with the URL of your main page
+            window.location.href = 'index.html';
+        }
+
+        searchInput.addEventListener('input', filterResults);
+    </script>
+</body>
+</html>

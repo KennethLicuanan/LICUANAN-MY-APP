@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #calculator {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #display {
+            padding: 10px;
+            font-size: 24px;
+            text-align: right;
+            border-bottom: 2px solid #ddd;
+        }
+
+        #buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        button {
+            font-size: 18px;
+            padding: 15px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #eee;
+        }
+
+        #equals {
+            grid-column: span 4;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        #clear {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        #back-button {
+            grid-column: span 4;
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <div id="display">0</div>
+        <div id="buttons">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>/</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>*</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>-</button>
+            <button>0</button>
+            <button>.</button>
+            <button id="clear">C</button>
+            <button>+</button>
+            <button id="equals" onclick="calculate()">=</button>
+            <button id="back-button" onclick="goToMainPage()">Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function addToDisplay(value) {
+            if (display.textContent === '0') {
+                display.textContent = value;
+            } else {
+                display.textContent += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.textContent = '0';
+        }
+
+        function calculate() {
+            try {
+                display.textContent = eval(display.textContent);
+            } catch (error) {
+                display.textContent = 'Error';
+            }
+        }
+
+        function goToMainPage() {
+            // Replace this with the URL of your main page
+            window.location.href = 'index.html';
+        }
+
+        document.querySelectorAll('#buttons button').forEach(button => {
+            button.addEventListener('click', () => addToDisplay(button.textContent));
+        });
+
+        document.getElementById('clear').addEventListener('click', clearDisplay);
+    </script>
+</body>
+</html>
