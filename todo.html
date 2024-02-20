@@ -12,10 +12,6 @@
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
         }
 
@@ -26,6 +22,8 @@
             overflow: hidden;
             width: 80%; /* Adjust the width as needed */
             max-width: 400px;
+            margin: auto;
+            margin-top: 70px; /* Adjust the top margin as needed */
         }
 
         #todo-header {
@@ -77,52 +75,94 @@
         }
     </style>
 </head>
+<body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">IT35</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <a class="navbar-brand" href="index.html">IT35</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+                </li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-<body>
-    <div id="todo-container">
-        <div id="todo-header">
-            <h2>To-Do List</h2>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
         </div>
-        <ul id="todo-list"></ul>
-        <input type="text" id="todo-input" placeholder="Add a new task">
-        <button id="add-button" onclick="addTodo()">Add Task</button>
-        <button id="back-button" onclick="goToMainPage()">Go Back</button>
     </div>
+</nav>
 
+
+<div id="todo-container">
+    <div id="todo-header">
+        <h2>To-Do List</h2>
+    </div>
+    <ul id="todo-list"></ul>
+    <input type="text" id="todo-input" placeholder="Add a new task">
+    <button id="add-button" onclick="addTodo()">Add Task</button>
+    <button id="back-button" onclick="goToMainPage()">Go Back</button>
+</div>
+<script>
+    const todoList = document.getElementById('todo-list');
+    const todoInput = document.getElementById('todo-input');
+
+    function addTodo() {
+        const todoText = todoInput.value.trim();
+
+        if (todoText !== '') {
+            const listItem = document.createElement('li');
+            listItem.className = 'todo-item';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+
+            const taskText = document.createElement('span');
+            taskText.textContent = todoText;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'delete-button';
+            deleteButton.addEventListener('click', () => deleteTodoItem(listItem));
+
+            listItem.appendChild(checkbox);
+            listItem.appendChild(taskText);
+            listItem.appendChild(deleteButton);
+
+            todoList.appendChild(listItem);
+
+            todoInput.value = '';
+        }
+    }
+
+    function deleteTodoItem(item) {
+        todoList.removeChild(item);
+    }
+
+    function goToMainPage() {
+        // Replace this with the URL of your main page
+        window.location.href = 'index.html';
+    }
+</script>
 </body>
 </html>
